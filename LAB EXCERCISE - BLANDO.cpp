@@ -10,17 +10,25 @@ void listAllfiles();
 int main(){
 	
 	int UserInput;
+	int choice;
 	
 	do{
 		
 	Options();
-	cout << "Enter the Number: ";
 	cin >> UserInput;
 	
 	if(UserInput == 1){
 	displayList();
+	cout << "Enter Number: ";
+	cin >> choice;
+	
+	if(choice == 1){
 	listAllfiles();
+	cout << "" <<endl;
+	}else{
+		break;
 	}
+}
 	
 	
 	}while(UserInput != 4);
@@ -48,13 +56,13 @@ void displayList(){
 	cout << "3. List if Name Wise" << endl;
 	
 }
-int listAllfiles(int Success){
+void listAllfiles(){
 	const char* path = "."; 
     DIR* directory = opendir(path);
 
     if (directory == nullptr) {
         cerr << "Error: Unable to open directory" << endl;
-        return 1;
+        
     }
 
     struct dirent* entry;
@@ -65,5 +73,4 @@ int listAllfiles(int Success){
     closedir(directory);
     
     
-    return 0;
 }
