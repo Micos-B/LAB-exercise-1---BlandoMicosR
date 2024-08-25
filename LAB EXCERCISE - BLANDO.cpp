@@ -1,8 +1,9 @@
 #include <iostream>
+#include <dirent.h>
 using namespace std;
 void Options();
 void displayList();	
-void listAllfiles
+void listAllfiles();
 
 
 
@@ -17,11 +18,8 @@ int main(){
 	cin >> UserInput;
 	
 	if(UserInput == 1){
-	void displayList();
-		
-	
-	
-	
+	displayList();
+	listAllfiles();
 	}
 	
 	
@@ -49,4 +47,23 @@ void displayList(){
 	cout << "2. List of Extension Files" << endl;
 	cout << "3. List if Name Wise" << endl;
 	
+}
+int listAllfiles(int Success){
+	const char* path = "."; 
+    DIR* directory = opendir(path);
+
+    if (directory == nullptr) {
+        cerr << "Error: Unable to open directory" << endl;
+        return 1;
+    }
+
+    struct dirent* entry;
+    while ((entry = readdir(directory)) != nullptr) {
+        cout << entry->d_name <<endl;
+    }
+
+    closedir(directory);
+    
+    
+    return 0;
 }
