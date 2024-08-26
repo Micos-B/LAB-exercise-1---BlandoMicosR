@@ -1,13 +1,38 @@
 #include <iostream>
 #include <dirent.h>
-
 #include <vector>
-#include <sys/>
+#include <sys/stat.h>
+#include <cstdio>
+#include <cstring>
 using namespace std;
 void Options();
 void displayList();	
 void listAllfiles();
 void listExtensionFiles();
+
+
+
+bool has_extension(const std::string& filename, const std::vector<std::string>& extensions) {
+    if (filename.empty() || extensions.empty()) {
+        return false;
+    }
+    
+    for (const auto& ext : extensions) {
+        if (filename.size() >= ext.size() &&
+            filename.compare(filename.size() - ext.size(), ext.size(), ext) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool is_regular_file(const std::string& path) {
+    struct stat file_stat;
+    if (stat(path.c_str(), &file_stat) != 0) {
+        return false; // Error occurred while retrieving file status
+    }
+    return S_ISREG(file_stat.st_mode);
+}
 
 
 int main(){
@@ -25,29 +50,29 @@ int main(){
 	cout << "Enter Number: ";
 	cin >> choice;
 	
-		if(choice == 1){
+	if(choice == 1){
+	cout << "List of All Files: " <<endl;
+	cout <<endl;
+	
 	listAllfiles();
-	cout << "" <<endl;
-		}else if(choice == 2){
-		 listExtensionFiles();
-		}	
-		
-		
-		
-		
-		
-		
+	cout <<endl;
+	
+	}
+	if(choice == 2){
+	cout << "List of All Extesnsion Files: " <<endl;	
+	cout <<endl;
+	
+	listExtensionFiles();
+	cout <<endl;
+	
+	}	
 		
 		else{
+			
 		break;
-		}
-	
-	
-	
-	
-	
-	
-}
+	}
+	}
+		
 	
 	
 	}while(UserInput != 4);
@@ -76,7 +101,7 @@ void displayList(){
 	
 }
 void listAllfiles(){
-	const char* path = "."; 
+	const char* path = "C://Users//user//Documents"; 
     DIR* directory = opendir(path);
 
     if (directory == nullptr) {
@@ -93,10 +118,10 @@ void listAllfiles(){
 }
     
 void listExtensionFiles(){
-	string directory_path = "./"; // Current directory
+	string directory_path = "C://Users//user//Documents"; // Current directory
 
     // List of file extensions to filter by
-    vector<string> extensions = {".cpp", ".hpp", ".h", ".c", ".o"};
+    vector<string> extensions = {".cpp", ".pptx", ".txt", ".c", ".o"};
 
     // Open the directory
     DIR* dir = opendir(directory_path.c_str());
@@ -116,4 +141,4 @@ void listExtensionFiles(){
     }
 }   
     
-}
+
