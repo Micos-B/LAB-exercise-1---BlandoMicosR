@@ -1,10 +1,13 @@
 #include <iostream>
 #include <dirent.h>
+
+#include <vector>
+#include <sys/>
 using namespace std;
 void Options();
 void displayList();	
 void listAllfiles();
-
+void listExtensionFiles();
 
 
 int main(){
@@ -22,12 +25,28 @@ int main(){
 	cout << "Enter Number: ";
 	cin >> choice;
 	
-	if(choice == 1){
+		if(choice == 1){
 	listAllfiles();
 	cout << "" <<endl;
-	}else{
+		}else if(choice == 2){
+		 listExtensionFiles();
+		}	
+		
+		
+		
+		
+		
+		
+		
+		else{
 		break;
-	}
+		}
+	
+	
+	
+	
+	
+	
 }
 	
 	
@@ -71,6 +90,30 @@ void listAllfiles(){
     }
 
     closedir(directory);
+}
     
+void listExtensionFiles(){
+	string directory_path = "./"; // Current directory
+
+    // List of file extensions to filter by
+    vector<string> extensions = {".cpp", ".hpp", ".h", ".c", ".o"};
+
+    // Open the directory
+    DIR* dir = opendir(directory_path.c_str());
+    if (dir == nullptr) {
+        cerr << "Error opening directory: " << directory_path << std::endl;
+        ;
+    }
+
+    struct dirent* entry;
+    while ((entry = readdir(dir)) != nullptr) {
+        string filename = entry->d_name;
+        string full_path = directory_path + "/" + filename;
+
+        if (is_regular_file(full_path) && has_extension(filename, extensions)) {
+            cout << filename << std::endl;
+        }
+    }
+}   
     
 }
