@@ -10,7 +10,7 @@ void Options();
 void displayList();	
 void listAllfiles();
 void listExtensionFiles();
-void listNameWise(const std::string& directory_path, const std::string& file_to_search);
+void listNameWise(const string& directory_path, const string& file_to_search);
 
 
 int main(){
