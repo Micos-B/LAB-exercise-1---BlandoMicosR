@@ -11,10 +11,10 @@ int main() {
     int choice;
     while (true) {
         cout << "      Main Menu:     " << endl;
-        cout << "--------------------------------\n";
-        cout << "1. To Display List of Files\n";
-        cout << "2. To Create New Directory\n";
-        cout << "3. To Change the Working Directory\n";
+        cout << "\n";
+        cout << "1. Display List of Files\n";
+        cout << "2. Create New Directory\n";
+        cout << "3. Change the Working Directory\n";
         cout << "4. Exit Program\n";
         cout << "Enter Number: ";
         cin >> choice;
@@ -44,7 +44,7 @@ void list_file() {
     cout << "--------------------------------------\n" << endl;
     cout << "1. List All Files\n";
     cout << "2. List of Extension Files\n";
-    cout << "3. List of Name Wise\n";
+    cout << "3. List of Name Micos\n";
     cout << "Enter Number: ";
     cin >> choice;
 
